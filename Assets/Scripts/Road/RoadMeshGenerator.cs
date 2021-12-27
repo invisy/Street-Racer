@@ -77,7 +77,7 @@ namespace Road
         private Vector2 GetVectorBetweenRoadParts(Vector2 leftPart, Vector2 rightPart, float roadWidth)
         {
             Vector2 normalizedLeftPart = -leftPart.normalized; //change direction of vector and normalize
-            Vector2 normalizedRightPart = rightPart.normalized; // normalize
+            Vector2 normalizedRightPart = rightPart.normalized; // only normalize
 
             float halfAngleRad = Vector2.Angle(normalizedLeftPart, normalizedRightPart)/2*math.PI/180;
             float vectorLength = (roadWidth/2)/(math.sin(halfAngleRad));

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Chase : MonoBehaviour
@@ -25,8 +23,6 @@ public class Chase : MonoBehaviour
     {
         Vector2 distance = (Vector2) (_carPhysicsToFollow.transform.position - transform.position);
 
-        Debug.Log("");
-        
         if (distance.magnitude < arriveRadius
             && _carPhysicsToFollow.Velocity.magnitude >= maxAllowedSpeed)
         {
@@ -40,11 +36,7 @@ public class Chase : MonoBehaviour
 
         if (isChasing)
         {
-            return distance.normalized;
-        }
-        if (_carPhysics.IsOnRoad)
-        {
-            return Vector2.up;
+            return distance.normalized*_carPhysics.MaxVelocity;
         }
 
         return Vector2.zero;
