@@ -19,7 +19,7 @@ public class CarPhysics : MonoBehaviour
     [SerializeField]
     private float thrust = 1f;
     
-    [SerializeField, Range(0, 2)]
+    [SerializeField, Range(0, 5)]
     private float rotationSpeed = 0.5f;
     
     private Vector2 _velocity = Vector2.zero;
