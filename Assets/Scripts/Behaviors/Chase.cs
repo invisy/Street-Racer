@@ -41,6 +41,4 @@ public class Chase : MonoBehaviour
 
         return Vector2.zero;
     }
-    
-    
 }
