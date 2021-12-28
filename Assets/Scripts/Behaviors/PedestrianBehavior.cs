@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Road;
+
 public class PedestrianBehavior : MonoBehaviour
 {
 
@@ -12,6 +14,7 @@ public class PedestrianBehavior : MonoBehaviour
     
     [SerializeField] private float arriveRadius = 10;
 
+    private RoadEntity _roadEntity;
     private PedestrianController _pedestrianController; 
     private List<CarPhysics> _carsPhysics;
 
@@ -21,6 +24,7 @@ public class PedestrianBehavior : MonoBehaviour
         _pedestrianController = GetComponent<PedestrianController>();
         
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+        _roadEntity = GameObject.FindGameObjectWithTag("Road").GetComponent<RoadEntity>();
 
         foreach (var car in cars)
         {
@@ -34,7 +38,7 @@ public class PedestrianBehavior : MonoBehaviour
 
         System.Random rnd = new System.Random();
 
-        resultVector.x = rnd.Next(100);
+        resultVector.x += rnd.Next(100);
         if (randomBool(rnd))
         {
             angle+= angleChangeStep;
@@ -57,11 +61,11 @@ public class PedestrianBehavior : MonoBehaviour
                 if (((Vector2)car.transform.position - ((Vector2)transform.position + hypothetic.normalized)).magnitude >
                     ((Vector2)car.transform.position - ((Vector2)transform.position - hypothetic.normalized)).magnitude)
                 {
-                    resultVector = hypothetic;
+                    resultVector += hypothetic;
                 }
                 else
                 {
-                    resultVector = hypothetic * -1;
+                    resultVector += hypothetic * -1;
                 }
             }
         }

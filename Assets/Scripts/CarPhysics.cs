@@ -27,7 +27,11 @@ public class CarPhysics : MonoBehaviour
     private Vector2 _acceleration = Vector2.zero;
 
     public Vector2 Velocity => _velocity;
-    public float MaxVelocity =>  maxVelocity;
+    public float MaxVelocity
+    {
+        get => maxVelocity;
+        set => maxVelocity = value;
+    }
     public float Thrust => thrust;
     public float Friction => friction;
 

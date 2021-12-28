@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Car
   - Pedestrian
+  - Road
+  - GameOverText
   layers:
   - Default
   - TransparentFX

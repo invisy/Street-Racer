@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class RoadColisionHandler : MonoBehaviour
 {
-    private float _initialCarFriction = 0.0f;
-    
+    private float frictionDelta = 0.1f;
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.TryGetComponent<CarPhysics>(out var carPhysics))
         {
-            _initialCarFriction = carPhysics.Friction;
-            carPhysics.SetFriction(0.25f);
+            float currentCarFriction = carPhysics.Friction;
+            carPhysics.SetFriction(currentCarFriction - frictionDelta);
+            carPhysics.MaxVelocity *= 1.5f;
         }
     }
     
@@ -17,7 +17,9 @@ public class RoadColisionHandler : MonoBehaviour
     {
         if (col.gameObject.TryGetComponent<CarPhysics>(out var carPhysics))
         {
-            carPhysics.SetFriction(_initialCarFriction);
+            float currentCarFriction = carPhysics.Friction;
+            carPhysics.SetFriction(currentCarFriction + frictionDelta);
+            carPhysics.MaxVelocity /= 1.5f;
         }
     }
 }

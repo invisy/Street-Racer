@@ -3,6 +3,7 @@ using UnityEngine;
 public class Chase : MonoBehaviour
 {
     [SerializeField] private GameObject objectToFollow;
+    [SerializeField] private GameObject road;
 
     [SerializeField] private float arriveRadius;
 
@@ -35,10 +36,8 @@ public class Chase : MonoBehaviour
         }
 
         if (isChasing)
-        {
             return distance.normalized*_carPhysics.MaxVelocity;
-        }
-
+        
         return Vector2.zero;
     }
 }
