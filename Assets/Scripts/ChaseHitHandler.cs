@@ -10,7 +10,7 @@ public class ChaseHitHandler : MonoBehaviour
             GameStatus.PlayerWin = false;
             GameStatus.GameEnded = true;
             
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }

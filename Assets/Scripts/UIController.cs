@@ -7,6 +7,6 @@ public class UIController : MonoBehaviour
 {
     public void Exit()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
 }

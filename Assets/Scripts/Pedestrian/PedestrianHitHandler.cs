@@ -12,8 +12,9 @@ public class PedestrianHitHandler : MonoBehaviour
     {
         if (col.gameObject.TryGetComponent<CarPhysics>(out var carPhysics))
         {
+            GetComponent<CircleCollider2D>().enabled = false;
             var maxVel = carPhysics.MaxVelocity;
-            if(_oldMaxVelocity == 0 && maxVel > 1)
+            if(_oldMaxVelocity == 0 && maxVel > 0)
                 _oldMaxVelocity = maxVel;
             
             carPhysics.MaxVelocity = 0;
@@ -27,5 +28,6 @@ public class PedestrianHitHandler : MonoBehaviour
         
         carPhysics.MaxVelocity = _oldMaxVelocity;
         _oldMaxVelocity = 0;
+        GetComponent<CircleCollider2D>().enabled = true;
     }
 }

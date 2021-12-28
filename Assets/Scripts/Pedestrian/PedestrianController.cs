@@ -48,6 +48,7 @@ public class PedestrianController : MonoBehaviour
             velocity += (desiredVelocity - _velocity);
         }
 
+        
         _velocity = velocity;
     }
 }

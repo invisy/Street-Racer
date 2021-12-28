@@ -38,7 +38,7 @@ public class PedestrianBehavior : MonoBehaviour
 
         System.Random rnd = new System.Random();
 
-        resultVector.x += rnd.Next(100);
+        resultVector.x = rnd.Next(100);
         if (randomBool(rnd))
         {
             angle+= angleChangeStep;
@@ -50,7 +50,7 @@ public class PedestrianBehavior : MonoBehaviour
         var futurePos = (Vector2) _pedestrianController.transform.position + _pedestrianController.Velocity.normalized * circleDistance;
         var vector = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * circleRadius;
 
-        resultVector = (futurePos + vector - (Vector2)transform.position);
+        resultVector += (futurePos + vector - (Vector2)transform.position);
 
         foreach (var car in _carsPhysics)
         {
@@ -58,14 +58,19 @@ public class PedestrianBehavior : MonoBehaviour
             if (distance.magnitude < arriveRadius)
             {
                 Vector2 hypothetic = new Vector2(-car.Velocity.y, car.Velocity.x);
-                if (((Vector2)car.transform.position - ((Vector2)transform.position + hypothetic.normalized)).magnitude >
-                    ((Vector2)car.transform.position - ((Vector2)transform.position - hypothetic.normalized)).magnitude)
+                if (hypothetic.magnitude > 0)
                 {
-                    resultVector += hypothetic;
-                }
-                else
-                {
-                    resultVector += hypothetic * -1;
+                    if (((Vector2)car.transform.position - ((Vector2)transform.position + hypothetic.normalized))
+                        .magnitude >
+                        ((Vector2)car.transform.position - ((Vector2)transform.position - hypothetic.normalized))
+                        .magnitude)
+                    {
+                        resultVector = hypothetic;
+                    }
+                    else
+                    {
+                        resultVector = hypothetic * -1;
+                    }
                 }
             }
         }
